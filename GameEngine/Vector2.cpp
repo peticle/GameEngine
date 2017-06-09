@@ -1,5 +1,7 @@
 #include "Vector2.h"
 
+#define PI 3.14159265
+
 /*** Constructors ***/
 Vector2::Vector2() {
 	set(0, 0);
@@ -59,7 +61,15 @@ void Vector2::setMagnitude(float magnitude) {
 }
 
 /*** Static functions ***/
-float Vector2::angle(Vector2 vectorA, Vector2 vectorB) {}
+float Vector2::angle(Vector2 vectorA, Vector2 vectorB) {
+
+	// Normalize the two vectors
+	vectorA.normalize();
+	vectorB.normalize();
+
+	// Return the angle between the two vectors
+	return acos(dot(vectorA, vectorB)) * 180.0 / PI;
+}
 
 float Vector2::distance(Vector2 vectorA, Vector2 vectorB) {}
 
