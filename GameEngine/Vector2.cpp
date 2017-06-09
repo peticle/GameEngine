@@ -15,18 +15,30 @@ Vector2 Vector2::operator*(const Vector2& other) {}
 Vector2 Vector2::operator/(const Vector2& other) {}
 
 /*** Getters ***/
-float Vector2::getX() const {}
+float Vector2::getX() const {
+	return x;
+}
 
-float Vector2::getY() const {}
+float Vector2::getY() const {
+	return y;
+}
 
-float Vector2::getMagnitude() const {}
+float Vector2::getMagnitude() const {
+	return magnitude;
+}
 
 /*** Setters ***/
-void Vector2::setX(float x) {}
+void Vector2::setX(float x) {
+	this->x = x;
+}
 
-void Vector2::setY(float y) {}
+void Vector2::setY(float y) {
+	this->y = y;
+}
 
-void Vector2::setMagnitude(float magnitude) {}
+void Vector2::setMagnitude(float magnitude) {
+	this->magnitude = magnitude;
+}
 
 /*** Static functions ***/
 float Vector2::angle(Vector2 vectorA, Vector2 vectorB) {}
