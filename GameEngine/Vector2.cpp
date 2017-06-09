@@ -1,9 +1,15 @@
 #include "Vector2.h"
 
 /*** Constructors ***/
-Vector2::Vector2() {}
+Vector2::Vector2() {
+	set(0, 0);
+	magnitude = 0;
+}
 
-Vector2::Vector2(float x, float y) {}
+Vector2::Vector2(float x, float y) {
+	set(x, y);
+	magnitude = calcMagnitude();
+}
 
 /*** Operators ***/
 Vector2 Vector2::operator+(const Vector2& other) {}
@@ -58,6 +64,14 @@ bool Vector2::equals(Vector2 otherVector) {}
 
 void Vector2::normalize() {}
 
-void Vector2::set(float x, float y) {}
+void Vector2::set(float x, float y) {
+	setX(x);
+	setY(y);
+}
 
 std::string Vector2::toString() {}
+
+/*** Private functions ***/
+float Vector2::calcMagnitude() {
+	return sqrt(pow(getX(), 2) + pow(getY(), 2));
+}

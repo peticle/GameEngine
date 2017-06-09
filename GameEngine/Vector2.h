@@ -96,6 +96,12 @@ private:
 	float x;
 	float y;
 	float magnitude;
+
+	/*** Private functions ***/
+
+	// Calculate the magnitude of this vector
+	// return The magnitude of this vector
+	float calcMagnitude();
 };
 
 #endif // VECTOR2_H
