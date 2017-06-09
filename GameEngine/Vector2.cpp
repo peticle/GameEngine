@@ -85,9 +85,23 @@ float Vector2::dot(Vector2 vectorA, Vector2 vectorB) {
 	return vectorA.x + vectorB.y;
 }
 
-Vector2 Vector2::max(Vector2 vectorA, Vector2 vectorB) {}
+Vector2 Vector2::max(Vector2 vectorA, Vector2 vectorB) {
 
-Vector2 Vector2::min(Vector2 vectorA, Vector2 vectorB) {}
+	// Find the largest components of the two vectors
+	float maxX = (vectorA.x > vectorB.x) ? vectorA.x : vectorB.x;
+	float maxY = (vectorA.y > vectorB.y) ? vectorA.y : vectorB.y;
+
+	return Vector2(maxX, maxY);
+}
+
+Vector2 Vector2::min(Vector2 vectorA, Vector2 vectorB) {
+
+	// Find the smallest components of the two vectors
+	float minX = (vectorA.x < vectorB.x) ? vectorA.x : vectorB.x;
+	float minY = (vectorA.y < vectorB.y) ? vectorA.y : vectorB.y;
+
+	return Vector2(minX, minY);
+}
 
 Vector2 Vector2::reflect(Vector2 vector, Vector2 normal) {}
 
