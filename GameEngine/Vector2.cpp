@@ -103,7 +103,12 @@ Vector2 Vector2::min(Vector2 vectorA, Vector2 vectorB) {
 	return Vector2(minX, minY);
 }
 
-Vector2 Vector2::reflect(Vector2 vector, Vector2 normal) {}
+Vector2 Vector2::reflect(Vector2 vector, Vector2 normal) {
+
+	// Calculate the reflection of the vector
+	float dotProd = 2.0 * dot(vector, normal);
+	return Vector2(dotProd, dotProd) * normal - vector;
+}
 
 /*** Public functions ***/
 bool Vector2::equals(Vector2 other) {
