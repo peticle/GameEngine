@@ -12,6 +12,7 @@ Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber) {
 	currentFrame = 0;
 	endFrame = frameNumber - 1;
 	rotate = false;
+	timePassed = 0;
 }
 
 /*** Destructors ***/
@@ -23,24 +24,25 @@ Sprite::~Sprite() {
 /*** Public functions ***/
 void Sprite::update() {
 
-	timePassed += SDL_GetTicks() / 1000.0;
+	unsigned int ticks = SDL_GetTicks();
 
-	if(timePassed >= 1) {
-
-		std::cout << "1sec\n";
+	if(ticks > timePassed + 1000) {
 
 		currentFrame = (currentFrame != endFrame) ? currentFrame + 1 : 0;
 
 		currentCrop = firstFrameCrop;
 		currentCrop.x = currentCrop.w * currentFrame;
 
-		int textuW = 0;
-		SDL_QueryTexture(image->getTexture(), NULL, NULL, &textuW, NULL);
+		if(image != NULL && image->getTexture() != NULL) {
+			int textuW = 0;
+			int textuH = 0;
+			SDL_QueryTexture(image->getTexture(), NULL, NULL, &textuW, &textuH);
 
-		if (textuW / currentCrop.w * (currentFrame + 1) > 0)
-			currentCrop.y = currentCrop.h * (currentCrop.w * (currentFrame + 1));
+			if (textuW / currentCrop.w * (currentFrame + 1) > 0)
+				currentCrop.y = currentCrop.h * (currentCrop.w * (currentFrame + 1));
+		}
 
-		timePassed = 0;
+		timePassed = ticks;
 	}
 }
 

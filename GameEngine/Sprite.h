@@ -56,7 +56,7 @@ private:
 	unsigned int startFrame;
 	unsigned int currentFrame;
 	unsigned int endFrame;
-	float timePassed;
+	unsigned int timePassed;
 	bool rotate;
 };
 
