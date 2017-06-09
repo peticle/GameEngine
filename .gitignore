@@ -36,3 +36,4 @@
 *.db
 *.sln
 *.opendb
+*.ipch
