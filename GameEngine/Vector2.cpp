@@ -12,13 +12,21 @@ Vector2::Vector2(float x, float y) {
 }
 
 /*** Operators ***/
-Vector2 Vector2::operator+(const Vector2& other) {}
+Vector2 Vector2::operator+(const Vector2& other) {
+	return Vector2(getX() + other.getX(), getY() + other.getY());
+}
 
-Vector2 Vector2::operator-(const Vector2& other) {}
+Vector2 Vector2::operator-(const Vector2& other) {
+	return Vector2(getX() - other.getX(), getY() - other.getY());
+}
 
-Vector2 Vector2::operator*(const Vector2& other) {}
+Vector2 Vector2::operator*(const Vector2& other) {
+	return Vector2(getX() * other.getX(), getY() * other.getY());
+}
 
-Vector2 Vector2::operator/(const Vector2& other) {}
+Vector2 Vector2::operator/(const Vector2& other) {
+	return Vector2(getX() / other.getX(), getY() / other.getY());
+}
 
 /*** Getters ***/
 float Vector2::getX() const {
@@ -60,7 +68,7 @@ Vector2 Vector2::min(Vector2 vectorA, Vector2 vectorB) {}
 Vector2 Vector2::reflect(Vector2 vector, Vector2 normal) {}
 
 /*** Public functions ***/
-bool Vector2::equals(Vector2 otherVector) {}
+bool Vector2::equals(Vector2 other) {}
 
 void Vector2::normalize() {}
 

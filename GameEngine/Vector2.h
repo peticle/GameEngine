@@ -75,7 +75,7 @@ public:
 	// Return if two vectors are equals
 	// param otherVector The other vector
 	// return The result of the comparison of the two vectors
-	bool equals(Vector2 otherVector);
+	bool equals(Vector2 other);
 
 	// Normalize this vector
 	void normalize();
