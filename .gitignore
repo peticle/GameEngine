@@ -42,3 +42,5 @@
 *.tlog
 *.log
 *.idb
+*.ilk
+*.aps

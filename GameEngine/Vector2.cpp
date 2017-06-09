@@ -82,7 +82,7 @@ float Vector2::dot(Vector2 vectorA, Vector2 vectorB) {
 
 	// Calculate the dot productor of the two vectors
 	Vector2 prod = vectorA * vectorB;
-	return vectorA.x + vectorB.y;
+	return (prod.x + prod.y);
 }
 
 Vector2 Vector2::max(Vector2 vectorA, Vector2 vectorB) {
@@ -104,6 +104,9 @@ Vector2 Vector2::min(Vector2 vectorA, Vector2 vectorB) {
 }
 
 Vector2 Vector2::reflect(Vector2 vector, Vector2 normal) {
+
+	// Normalize the normal vector
+	normal.normalize();
 
 	// Calculate the reflection of the vector
 	float dotProd = 2.0 * dot(vector, normal);
