@@ -13,19 +13,19 @@ Vector2::Vector2(float x, float y) {
 
 /*** Operators ***/
 Vector2 Vector2::operator+(const Vector2& other) {
-	return Vector2(getX() + other.getX(), getY() + other.getY());
+	return Vector2(x + other.getX(), y + other.getY());
 }
 
 Vector2 Vector2::operator-(const Vector2& other) {
-	return Vector2(getX() - other.getX(), getY() - other.getY());
+	return Vector2(x - other.getX(), y - other.getY());
 }
 
 Vector2 Vector2::operator*(const Vector2& other) {
-	return Vector2(getX() * other.getX(), getY() * other.getY());
+	return Vector2(x * other.getX(), y * other.getY());
 }
 
 Vector2 Vector2::operator/(const Vector2& other) {
-	return Vector2(getX() / other.getX(), getY() / other.getY());
+	return Vector2(x / other.getX(), y / other.getY());
 }
 
 /*** Getters ***/
@@ -39,6 +39,10 @@ float Vector2::getY() const {
 
 float Vector2::getMagnitude() const {
 	return magnitude;
+}
+
+Vector2 Vector2::getNormalized() const {
+	return Vector2(x / magnitude, y / magnitude);
 }
 
 /*** Setters ***/
@@ -71,13 +75,15 @@ Vector2 Vector2::reflect(Vector2 vector, Vector2 normal) {}
 bool Vector2::equals(Vector2 other) {
 
 	// Check if the vectors are equals
-	if (getX() == other.getX() && getY() == other.getY())
+	if (x == other.getX() && y == other.getY())
 		return true;
 
 	return false;
 }
 
-void Vector2::normalize() {}
+void Vector2::normalize() {
+	*this = getNormalized();
+}
 
 void Vector2::set(float x, float y) {
 	setX(x);
@@ -85,10 +91,10 @@ void Vector2::set(float x, float y) {
 }
 
 std::string Vector2::toString() {
-	return "Vector2 : x(" + std::to_string(getX()) + "), y(" + std::to_string(getY()) + ")";
+	return "Vector2 : x(" + std::to_string(x) + "), y(" + std::to_string(y) + ")";
 }
 
 /*** Private functions ***/
 float Vector2::calcMagnitude() {
-	return sqrt(pow(getX(), 2) + pow(getY(), 2));
+	return sqrt(pow(x, 2) + pow(y, 2));
 }

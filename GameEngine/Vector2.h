@@ -25,6 +25,7 @@ public:
 	float getX() const;
 	float getY() const;
 	float getMagnitude() const;
+	Vector2 getNormalized() const;
 
 	/*** Setters ***/
 
