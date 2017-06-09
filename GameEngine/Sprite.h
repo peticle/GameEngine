@@ -20,6 +20,7 @@ public:
 	~Sprite();
 
 	/*** Getters ***/
+
 	Img *getImage() const;
 	SDL_Rect getFirstFrameCrop() const;
 	unsigned int getFrameNumber() const;
@@ -29,6 +30,7 @@ public:
 	bool getRotate() const;
 
 	/*** Setters ***/
+
 	void setImage(Img *image);
 	void setFirstFrameCrop(SDL_Rect firstFrameCrop);
 	void setFrameNumber(unsigned int frameNumber);
@@ -49,10 +51,12 @@ private:
 
 	Img *image;
 	SDL_Rect firstFrameCrop;
+	SDL_Rect currentCrop;
 	unsigned int frameNumber;
 	unsigned int startFrame;
 	unsigned int currentFrame;
 	unsigned int endFrame;
+	float timePassed;
 	bool rotate;
 };
 
