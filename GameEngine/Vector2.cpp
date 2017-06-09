@@ -63,7 +63,10 @@ float Vector2::angle(Vector2 vectorA, Vector2 vectorB) {}
 
 float Vector2::distance(Vector2 vectorA, Vector2 vectorB) {}
 
-float Vector2::dot(Vector2 vectorA, Vector2 vectorB) {}
+float Vector2::dot(Vector2 vectorA, Vector2 vectorB) {
+	Vector2 prod = vectorA * vectorB;
+	return vectorA.x + vectorB.y;
+}
 
 Vector2 Vector2::max(Vector2 vectorA, Vector2 vectorB) {}
 
