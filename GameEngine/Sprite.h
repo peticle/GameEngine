@@ -12,10 +12,14 @@ public:
 	/*** Constructors ***/
 
 	Sprite();
-	Sprite(Img *image, Vector2 firstFramePos, Vector2 frameSize, unsigned int frameNumber, SDL_Renderer *render);
-	Sprite(Img *image, Vector2 firstFramePos, Vector2 frameSize, unsigned int frameNumber, bool loop, bool pause, SDL_Renderer *render);
-	Sprite(Img *image, Vector2 firstFramePos, Vector2 frameSize, unsigned int frameNumber, bool loop, bool pause, bool rotate, SDL_Renderer *render);
-	Sprite(Img *image, Vector2 firstFramePos, Vector2 frameSize, unsigned int frameNumber, bool rotate, SDL_Renderer *render);
+	Sprite(Img *image, Vector2 firstFramePos, Vector2 frameSize,unsigned int frameNumber,
+		   SDL_Renderer *render);
+	Sprite(Img *image, Vector2 firstFramePos, Vector2 frameSize, unsigned int frameNumber,
+		   bool loop, bool pause, SDL_Renderer *render);
+	Sprite(Img *image, Vector2 firstFramePos, Vector2 frameSize, unsigned int frameNumber,
+		   bool loop, bool pause, bool rotate, SDL_Renderer *render);
+	Sprite(Img *image, Vector2 firstFramePos, Vector2 frameSize, unsigned int frameNumber,
+		   bool rotate, SDL_Renderer *render);
 
 	/*** Destructors ***/
 
@@ -23,6 +27,7 @@ public:
 
 	/*** Getters ***/
 
+	Img *getImage() const;
 	Vector2 getFirstFramePos() const;
 	Vector2 getFrameSize() const;
 	unsigned int getFrameNumber() const;
@@ -32,6 +37,7 @@ public:
 
 	/*** Setters ***/
 
+	void setImage(Img *image);
 	void setFirstFramePos(Vector2 pos);
 	void setFrameSize(Vector2 size);
 	void setFrameNumber(unsigned int frameNumber);
@@ -48,6 +54,7 @@ private:
 
 	/*** Variables ***/
 
+	Img *image;
 	Vector2 firstFramePos;
 	Vector2 frameSize;
 	unsigned int frameNumber;
