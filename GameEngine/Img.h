@@ -13,7 +13,7 @@ public:
 	/*** Constructors ***/
 
 	Img();
-	Img(std::string fileName, SDL_Rect rect, SDL_Renderer *render);
+	Img(std::string fileName, SDL_Renderer *render);
 
 	/*** Destructors ***/
 
