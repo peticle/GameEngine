@@ -36,3 +36,11 @@
 *.db
 *.sln
 *.opendb
+*.ipch
+*.pdb
+*.lastbuildstate
+*.tlog
+*.log
+*.idb
+*.ilk
+*.aps
