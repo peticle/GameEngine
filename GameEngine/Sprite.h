@@ -12,38 +12,11 @@ public:
 	/*** Constructors ***/
 
 	Sprite();
-	Sprite(Img *image, Vector2 firstFramePos, Vector2 frameSize,unsigned int frameNumber,
-		   SDL_Renderer *render);
-	Sprite(Img *image, Vector2 firstFramePos, Vector2 frameSize, unsigned int frameNumber,
-		   bool loop, bool pause, SDL_Renderer *render);
-	Sprite(Img *image, Vector2 firstFramePos, Vector2 frameSize, unsigned int frameNumber,
-		   bool loop, bool pause, bool rotate, SDL_Renderer *render);
-	Sprite(Img *image, Vector2 firstFramePos, Vector2 frameSize, unsigned int frameNumber,
-		   bool rotate, SDL_Renderer *render);
+	Sprite(std::vector<Img *> anim, std::vector<unsigned int> delay, bool rotate, SDL_Renderer *render);
 
 	/*** Destructors ***/
 
 	~Sprite();
-
-	/*** Getters ***/
-
-	Img *getImage() const;
-	Vector2 getFirstFramePos() const;
-	Vector2 getFrameSize() const;
-	unsigned int getFrameNumber() const;
-	bool getRotate() const;
-	bool getLoop() const;
-	bool getPause() const;
-
-	/*** Setters ***/
-
-	void setImage(Img *image);
-	void setFirstFramePos(Vector2 pos);
-	void setFrameSize(Vector2 size);
-	void setFrameNumber(unsigned int frameNumber);
-	void setRotate(bool rotate);
-	void setLoop(bool loop);
-	void setPause(bool pause);
 
 	/*** Public functions ***/
 
@@ -54,13 +27,11 @@ private:
 
 	/*** Variables ***/
 
-	Img *image;
-	Vector2 firstFramePos;
-	Vector2 frameSize;
-	unsigned int frameNumber;
-	bool rotate;
-	bool loop;
-	bool pause;
+	std::vector<Img *> anim;
+	std::vector<unsigned int> delay;
+	unsigned int currentFrame;
+	unsigned int startFrame;
+	unsigned int endFrame;
 	unsigned long timePassed;
 };
 
