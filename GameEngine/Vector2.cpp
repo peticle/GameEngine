@@ -68,7 +68,14 @@ Vector2 Vector2::min(Vector2 vectorA, Vector2 vectorB) {}
 Vector2 Vector2::reflect(Vector2 vector, Vector2 normal) {}
 
 /*** Public functions ***/
-bool Vector2::equals(Vector2 other) {}
+bool Vector2::equals(Vector2 other) {
+
+	// Check if the vectors are equals
+	if (getX() == other.getX() && getY() == other.getY())
+		return true;
+
+	return false;
+}
 
 void Vector2::normalize() {}
 
@@ -77,7 +84,9 @@ void Vector2::set(float x, float y) {
 	setY(y);
 }
 
-std::string Vector2::toString() {}
+std::string Vector2::toString() {
+	return "Vector2 : x(" + std::to_string(getX()) + "), y(" + std::to_string(getY()) + ")";
+}
 
 /*** Private functions ***/
 float Vector2::calcMagnitude() {
