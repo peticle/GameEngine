@@ -2,6 +2,7 @@
 #ifndef SPRITE_H
 #define SPRITE_H
 
+#include <map>
 #include <vector>
 #include "Img.h"
 
@@ -12,27 +13,47 @@ public:
 	/*** Constructors ***/
 
 	Sprite();
-	Sprite(std::vector<Img *> anim, std::vector<unsigned int> delay, bool rotate, SDL_Renderer *render);
+	Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber);
 
 	/*** Destructors ***/
 
 	~Sprite();
 
+	/*** Getters ***/
+	Img *getImage() const;
+	SDL_Rect getFirstFrameCrop() const;
+	unsigned int getFrameNumber() const;
+	unsigned int getStartFrame() const;
+	unsigned int getCurrentFrame() const;
+	unsigned int getEndFrame() const;
+	bool getRotate() const;
+
+	/*** Setters ***/
+	void setImage(Img *image);
+	void setFirstFrameCrop(SDL_Rect firstFrameCrop);
+	void setFrameNumber(unsigned int frameNumber);
+	void setStartFrame(unsigned int startFrame);
+	void setCurrentFram(unsigned int currentFrame);
+	void setEndFrame(unsigned int endFrame);
+	void setRotate(bool rotate);
+
 	/*** Public functions ***/
 
 	// Update the frame of the sprite
 	void update();
+	void draw(Vector2 size, Vector2 pos, SDL_Renderer *render);
 
 private:
 
 	/*** Variables ***/
 
-	std::vector<Img *> anim;
-	std::vector<unsigned int> delay;
-	unsigned int currentFrame;
+	Img *image;
+	SDL_Rect firstFrameCrop;
+	unsigned int frameNumber;
 	unsigned int startFrame;
+	unsigned int currentFrame;
 	unsigned int endFrame;
-	unsigned long timePassed;
+	bool rotate;
 };
 
 #endif // SPRITE_H
