@@ -43,3 +43,8 @@
 *.db
 *.vcxproj
 *.vcxproj
+*.sln
+*.filters
+img/img.jpg
+*.enc
+GameEngine/main.cpp
