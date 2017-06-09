@@ -71,9 +71,16 @@ float Vector2::angle(Vector2 vectorA, Vector2 vectorB) {
 	return acos(dot(vectorA, vectorB)) * 180.0 / PI;
 }
 
-float Vector2::distance(Vector2 vectorA, Vector2 vectorB) {}
+float Vector2::distance(Vector2 vectorA, Vector2 vectorB) {
+
+	// Calculate the distance between the two vectors
+	Vector2 minus = vectorA - vectorB;
+	return sqrt(pow(minus.x, 2) + pow(minus.y, 2));
+}
 
 float Vector2::dot(Vector2 vectorA, Vector2 vectorB) {
+
+	// Calculate the dot productor of the two vectors
 	Vector2 prod = vectorA * vectorB;
 	return vectorA.x + vectorB.y;
 }
