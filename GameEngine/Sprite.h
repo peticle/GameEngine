@@ -14,6 +14,10 @@ public:
 
 	Sprite();
 	Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber);
+	Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bool rotate);
+	Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bool rotate, bool once);
+	Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bool rotate, bool once, bool pause);
+	Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bool rotate, bool once, bool pause, unsigned int startFrame, unsigned int endFrame);
 
 	/*** Destructors ***/
 
@@ -23,6 +27,7 @@ public:
 
 	Img *getImage() const;
 	SDL_Rect getFirstFrameCrop() const;
+	SDL_Rect getCurrentCrop() const;
 	unsigned int getFrameNumber() const;
 	unsigned int getStartFrame() const;
 	unsigned int getCurrentFrame() const;
@@ -58,6 +63,8 @@ private:
 	unsigned int endFrame;
 	unsigned int timePassed;
 	bool rotate;
+	bool pause;
+	bool once;
 };
 
 #endif // SPRITE_H

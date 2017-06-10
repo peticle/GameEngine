@@ -8,12 +8,47 @@ Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber) {
 	this->image = image;
 	this->firstFrameCrop = firstFrameCrop;
 	this->frameNumber = frameNumber;
+	currentCrop = firstFrameCrop;
 	startFrame = 0;
-	currentFrame = 0;
-	endFrame = frameNumber - 1;
+	currentFrame = startFrame;
+	endFrame = frameNumber;
 	rotate = false;
 	timePassed = 0;
+	once = false;
+	pause = false;
 }
+
+Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bool rotate) {}
+
+Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bool rotate, bool once) {
+	this->image = image;
+	this->firstFrameCrop = firstFrameCrop;
+	this->frameNumber = frameNumber;
+	this->rotate = rotate;
+	this->once = once;
+	currentCrop = firstFrameCrop;
+	startFrame = 0;
+	currentFrame = startFrame;
+	endFrame = frameNumber;
+	timePassed = 0;
+	pause = false;
+}
+
+Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bool rotate, bool once, bool pause) {
+	this->image = image;
+	this->firstFrameCrop = firstFrameCrop;
+	this->frameNumber = frameNumber;
+	this->rotate = rotate;
+	this->once = once;
+	this->pause = pause;
+	currentCrop = firstFrameCrop;
+	startFrame = 0;
+	currentFrame = startFrame;
+	endFrame = frameNumber;
+	timePassed = 0;
+}
+
+Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bool rotate, bool once, bool pause, unsigned int startFrame, unsigned int endFrame) {}
 
 /*** Destructors ***/
 Sprite::~Sprite() {
@@ -21,31 +56,51 @@ Sprite::~Sprite() {
 	image = NULL;
 }
 
+SDL_Rect Sprite::getCurrentCrop() const {
+	return currentCrop;
+}
+
+Img *Sprite::getImage() const {
+	return image;
+}
+
 /*** Public functions ***/
 void Sprite::update() {
 
-	unsigned int ticks = SDL_GetTicks();
+	// Check if animation is not paused
+	if(!pause) {
 
-	if(ticks > timePassed + 1000) {
+		unsigned int ticks = SDL_GetTicks();
 
-		currentFrame = (currentFrame != endFrame) ? currentFrame + 1 : 0;
+		if (ticks > timePassed + 100) {
 
-		currentCrop = firstFrameCrop;
-		currentCrop.x = currentCrop.w * currentFrame;
+			if (image != NULL && image->getTexture() != NULL) {
 
-		if(image != NULL && image->getTexture() != NULL) {
-			int textuW = 0;
-			int textuH = 0;
-			SDL_QueryTexture(image->getTexture(), NULL, NULL, &textuW, &textuH);
+				// Ajust the index of the frame
+				if (currentFrame < endFrame - 1)
+					currentFrame++;
+				else {
+					currentFrame = startFrame;
+					currentCrop = firstFrameCrop;
+				}
 
-			if (textuW / currentCrop.w * (currentFrame + 1) > 0)
-				currentCrop.y = currentCrop.h * (currentCrop.w * (currentFrame + 1));
+				int textuW = 0;
+				SDL_QueryTexture(image->getTexture(), NULL, NULL, &textuW, NULL);
+
+				int numPerLine = textuW / firstFrameCrop.w;
+				int excess = firstFrameCrop.w / (textuW - currentCrop.x);
+
+				// Ajuste la position de l'image
+				currentCrop.x = currentCrop.w * (currentFrame % numPerLine);
+				currentCrop.y = currentCrop.h * excess + currentCrop.y;
+			}
+
+			timePassed = ticks;
 		}
-
-		timePassed = ticks;
 	}
 }
 
 void Sprite::draw(Vector2 size, Vector2 pos, SDL_Renderer *render) {
-
+	update();
+	image->draw(size, pos, currentCrop, render);
 }
