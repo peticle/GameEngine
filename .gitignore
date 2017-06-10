@@ -48,3 +48,7 @@
 img/img.jpg
 *.enc
 GameEngine/main.cpp
+img/walk.png
+img/mario.png
+img/link.jpg
+GameEngine/main.cpp

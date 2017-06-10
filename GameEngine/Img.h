@@ -51,6 +51,14 @@ public:
 	// param render The renderer
 	void draw(Vector2 size, Vector2 pos, SDL_Rect crop, SDL_Renderer *render);
 
+	// Draw the image on the window at a given position and size with crop and possibly rotation
+	// param size The size of the image
+	// param pos The position of the image
+	// param crop The crop for the image
+	// param rotate If the image is rotated
+	// param render The renderer
+	void draw(Vector2 size, Vector2 pos, SDL_Rect crop, bool rotate, SDL_Renderer *render);
+
 private:
 
 	/*** Variables ***/

@@ -59,6 +59,16 @@ void Img::draw(Vector2 size, Vector2 pos, SDL_Rect crop, SDL_Renderer *render) {
 	SDL_RenderCopy(render, textu, &crop, &rect);
 }
 
+void Img::draw(Vector2 size, Vector2 pos, SDL_Rect crop, bool rotate, SDL_Renderer *render) {
+	
+	prepareDraw(size, pos);
+
+	if (!rotate)
+		draw(size, pos, crop, render);
+	else
+		SDL_RenderCopyEx(render, textu, &crop, &rect, 180.0, NULL, SDL_FLIP_VERTICAL);
+}
+
 /*** Private functions ***/
 void Img::prepareDraw(Vector2 size, Vector2 pos) {
 	rect.w = size.getX();

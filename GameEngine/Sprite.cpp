@@ -9,7 +9,7 @@ Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber) {
 	this->firstFrameCrop = firstFrameCrop;
 	this->frameNumber = frameNumber;
 	startFrame = 0;
-	endFrame = frameNumber;
+	endFrame = frameNumber - 1;
 	rotate = false;
 	once = false;
 	pause = false;
@@ -24,7 +24,7 @@ Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bo
 	this->frameNumber = frameNumber;
 	this->rotate = rotate;
 	startFrame = 0;
-	endFrame = frameNumber;
+	endFrame = frameNumber - 1;
 	once = false;
 	pause = false;
 	currentCrop = firstFrameCrop;
@@ -39,7 +39,7 @@ Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bo
 	this->rotate = rotate;
 	this->once = once;
 	startFrame = 0;
-	endFrame = frameNumber;
+	endFrame = frameNumber - 1;
 	pause = false;
 	currentCrop = firstFrameCrop;
 	currentFrame = startFrame;
@@ -54,7 +54,7 @@ Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bo
 	this->once = once;
 	this->pause = pause;
 	startFrame = 0;
-	endFrame = frameNumber;
+	endFrame = frameNumber - 1;
 	currentCrop = firstFrameCrop;
 	currentFrame = startFrame;
 	timePassed = 0;
@@ -91,28 +91,37 @@ Img *Sprite::getImage() const {
 /*** Public functions ***/
 void Sprite::update() {
 
-	// Check if animation is not paused
+	// Animate the sprite if not paused
 	if(!pause) {
 
 		unsigned int ticks = SDL_GetTicks();
 
 		if (ticks > timePassed + 100) {
 
+			// Check if the image and the texture of the image exists
 			if (image != NULL && image->getTexture() != NULL) {
 
 				// Ajust the index of the frame
-				if (currentFrame < endFrame - 1)
+				if(currentFrame < endFrame)
 					currentFrame++;
 				else {
-					currentFrame = startFrame;
-					currentCrop = firstFrameCrop;
+					if(!once) {
+						currentFrame = startFrame;
+						currentCrop = firstFrameCrop;
+					} else {
+						pause = true;
+					}
 				}
 
+				/// Ajouter propriété dans la classe img
 				int textuW = 0;
 				SDL_QueryTexture(image->getTexture(), NULL, NULL, &textuW, NULL);
 
+				// Get number of image per line possible
 				int numPerLine = textuW / firstFrameCrop.w;
-				int excess = firstFrameCrop.w / (textuW - currentCrop.x);
+
+				// Get the number of time the image excess the first line (with a merge of 1 px)
+				int excess = firstFrameCrop.w / ((textuW - currentCrop.x) + 1);
 
 				// Ajuste la position de l'image
 				currentCrop.x = currentCrop.w * (currentFrame % numPerLine);
@@ -126,5 +135,5 @@ void Sprite::update() {
 
 void Sprite::draw(Vector2 size, Vector2 pos, SDL_Renderer *render) {
 	update();
-	image->draw(size, pos, currentCrop, render);
+	image->draw(size, pos, currentCrop, rotate, render);
 }
