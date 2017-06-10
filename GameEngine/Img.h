@@ -23,6 +23,7 @@ public:
 
 	SDL_Texture *getTexture() const;
 	SDL_Rect getRect() const;
+	Vector2 getTextuSize() const;
 
 	/*** Setters ***/
 
@@ -65,6 +66,7 @@ private:
 
 	SDL_Texture *textu;
 	SDL_Rect rect;
+	Vector2 textuSize;
 
 	/*** Private functions ***/
 	void prepareDraw(Vector2 size, Vector2 pos);

@@ -13,11 +13,11 @@ public:
 	/*** Constructors ***/
 
 	Sprite();
-	Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber);
-	Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bool rotate);
-	Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bool rotate, bool once);
-	Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bool rotate, bool once, bool pause);
-	Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int startFrame, unsigned int endFrame, unsigned int frameNumber, bool rotate, bool once, bool pause);
+	Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, float delay);
+	Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bool rotate, float delay);
+	Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bool rotate, bool once, float delay);
+	Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bool rotate, bool once, bool pause, float delay);
+	Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int startFrame, unsigned int endFrame, unsigned int frameNumber, bool rotate, bool once, bool pause, float delay);
 
 	/*** Destructors ***/
 
@@ -65,6 +65,7 @@ private:
 	bool rotate;
 	bool pause;
 	bool once;
+	float delay;
 };
 
 #endif // SPRITE_H

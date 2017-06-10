@@ -4,10 +4,11 @@
 /*** Constructors ***/
 Sprite::Sprite() {}
 
-Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber) {
+Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, float delay) {
 	this->image = image;
 	this->firstFrameCrop = firstFrameCrop;
 	this->frameNumber = frameNumber;
+	this->delay = delay;
 	startFrame = 0;
 	endFrame = frameNumber - 1;
 	rotate = false;
@@ -18,11 +19,12 @@ Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber) {
 	timePassed = 0;
 }
 
-Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bool rotate) {
+Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bool rotate, float delay) {
 	this->image = image;
 	this->firstFrameCrop = firstFrameCrop;
 	this->frameNumber = frameNumber;
 	this->rotate = rotate;
+	this->delay = delay;
 	startFrame = 0;
 	endFrame = frameNumber - 1;
 	once = false;
@@ -32,12 +34,13 @@ Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bo
 	timePassed = 0;
 }
 
-Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bool rotate, bool once) {
+Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bool rotate, bool once, float delay) {
 	this->image = image;
 	this->firstFrameCrop = firstFrameCrop;
 	this->frameNumber = frameNumber;
 	this->rotate = rotate;
 	this->once = once;
+	this->delay = delay;
 	startFrame = 0;
 	endFrame = frameNumber - 1;
 	pause = false;
@@ -46,13 +49,14 @@ Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bo
 	timePassed = 0;
 }
 
-Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bool rotate, bool once, bool pause) {
+Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bool rotate, bool once, bool pause, float delay) {
 	this->image = image;
 	this->firstFrameCrop = firstFrameCrop;
 	this->frameNumber = frameNumber;
 	this->rotate = rotate;
 	this->once = once;
 	this->pause = pause;
+	this->delay = delay;
 	startFrame = 0;
 	endFrame = frameNumber - 1;
 	currentCrop = firstFrameCrop;
@@ -60,7 +64,7 @@ Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bo
 	timePassed = 0;
 }
 
-Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int startFrame, unsigned int endFrame, unsigned int frameNumber, bool rotate, bool once, bool pause) {
+Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int startFrame, unsigned int endFrame, unsigned int frameNumber, bool rotate, bool once, bool pause, float delay) {
 	this->image = image;
 	this->firstFrameCrop = firstFrameCrop;
 	this->startFrame = startFrame;
@@ -69,6 +73,7 @@ Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int startFrame, uns
 	this->rotate = rotate;
 	this->once = once;
 	this->pause = pause;
+	this->delay = delay;
 	currentCrop = firstFrameCrop;
 	currentFrame = startFrame;
 	timePassed = 0;
@@ -96,7 +101,7 @@ void Sprite::update() {
 
 		unsigned int ticks = SDL_GetTicks();
 
-		if (ticks > timePassed + 100) {
+		if (ticks > timePassed + (delay * 1000.0)) {
 
 			// Check if the image and the texture of the image exists
 			if (image != NULL && image->getTexture() != NULL) {
@@ -105,6 +110,7 @@ void Sprite::update() {
 				if(currentFrame < endFrame)
 					currentFrame++;
 				else {
+					// Pause the animation at the end if it should
 					if(!once) {
 						currentFrame = startFrame;
 						currentCrop = firstFrameCrop;
@@ -113,9 +119,8 @@ void Sprite::update() {
 					}
 				}
 
-				/// Ajouter propriété dans la classe img
-				int textuW = 0;
-				SDL_QueryTexture(image->getTexture(), NULL, NULL, &textuW, NULL);
+				// Get the width of the texture of the image
+				int textuW = image->getTextuSize().getX();
 
 				// Get number of image per line possible
 				int numPerLine = textuW / firstFrameCrop.w;
@@ -128,6 +133,7 @@ void Sprite::update() {
 				currentCrop.y = currentCrop.h * excess + currentCrop.y;
 			}
 
+			// Refresh the time elapsed
 			timePassed = ticks;
 		}
 	}
