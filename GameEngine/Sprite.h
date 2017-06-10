@@ -2,8 +2,6 @@
 #ifndef SPRITE_H
 #define SPRITE_H
 
-#include <map>
-#include <vector>
 #include "Img.h"
 
 // Manage the sprites
@@ -14,10 +12,17 @@ public:
 
 	Sprite();
 	Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, float delay);
-	Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bool rotate, float delay);
-	Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bool rotate, bool once, float delay);
-	Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bool rotate, bool once, bool pause, float delay);
-	Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int startFrame, unsigned int endFrame, unsigned int frameNumber, bool rotate, bool once, bool pause, float delay);
+	Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bool rotate,
+		   float delay);
+
+	Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bool rotate,
+		   bool once, float delay);
+
+	Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bool rotate,
+		   bool once, bool pause, float delay);
+
+	Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int startFrame, unsigned int endFrame,
+		   unsigned int frameNumber, bool rotate, bool once, bool pause, float delay);
 
 	/*** Destructors ***/
 
@@ -57,6 +62,11 @@ public:
 
 	// Update the frame of the sprite
 	void update();
+
+	// Draw the sprite on the screen
+	// param size The size of the sprite on the screen
+	// param pos The position of the sprite on the screen
+	// param render The renderer
 	void draw(Vector2 size, Vector2 pos, SDL_Renderer *render);
 
 private:

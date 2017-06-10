@@ -1,5 +1,4 @@
 #include "Sprite.h"
-#include <iostream>
 
 /*** Constructors ***/
 Sprite::Sprite() {}
@@ -19,7 +18,9 @@ Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, fl
 	timePassed = 0;
 }
 
-Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bool rotate, float delay) {
+Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bool rotate,
+			   float delay)
+{
 	this->image = image;
 	this->firstFrameCrop = firstFrameCrop;
 	this->frameNumber = frameNumber;
@@ -34,7 +35,9 @@ Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bo
 	timePassed = 0;
 }
 
-Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bool rotate, bool once, float delay) {
+Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bool rotate,
+			   bool once, float delay)
+{
 	this->image = image;
 	this->firstFrameCrop = firstFrameCrop;
 	this->frameNumber = frameNumber;
@@ -49,7 +52,9 @@ Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bo
 	timePassed = 0;
 }
 
-Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bool rotate, bool once, bool pause, float delay) {
+Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bool rotate,
+			   bool once, bool pause, float delay)
+{
 	this->image = image;
 	this->firstFrameCrop = firstFrameCrop;
 	this->frameNumber = frameNumber;
@@ -64,7 +69,9 @@ Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bo
 	timePassed = 0;
 }
 
-Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int startFrame, unsigned int endFrame, unsigned int frameNumber, bool rotate, bool once, bool pause, float delay) {
+Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int startFrame, unsigned int endFrame,
+			   unsigned int frameNumber, bool rotate, bool once, bool pause, float delay)
+{
 	this->image = image;
 	this->firstFrameCrop = firstFrameCrop;
 	this->startFrame = startFrame;
@@ -134,6 +141,55 @@ float Sprite::getDelay() const {
 	return delay;
 }
 
+/*** Setters ***/
+void Sprite::setImage(Img *image) {
+	this->image = image;
+}
+
+void Sprite::setFirstFrameCrop(SDL_Rect firstFrameCrop) {
+	this->firstFrameCrop = firstFrameCrop;
+}
+
+void Sprite::setCurrentCrop(SDL_Rect currentCrop) {
+	this->currentCrop = currentCrop;
+}
+
+void Sprite::setFrameNumber(unsigned int frameNumber) {
+	this->frameNumber = frameNumber;
+}
+
+void Sprite::setStartFrame(unsigned int startFrame) {
+	this->startFrame = startFrame;
+}
+
+void Sprite::setCurrentFrame(unsigned int currentFrame) {
+	this->currentFrame = currentFrame;
+}
+
+void Sprite::setEndFrame(unsigned int endFrame) {
+	this->endFrame = endFrame;
+}
+
+void Sprite::setTimePassed(unsigned int timePassed) {
+	this->timePassed = timePassed;
+}
+
+void Sprite::setRotate(bool rotate) {
+	this->rotate = rotate;
+}
+
+void Sprite::setPause(bool pause) {
+	this->pause = pause;
+}
+
+void Sprite::setOnce(bool once) {
+	this->once = once;
+}
+
+void Sprite::setDelay(float delay) {
+	this->delay = delay;
+}
+
 /*** Public functions ***/
 void Sprite::update() {
 
@@ -180,7 +236,9 @@ void Sprite::update() {
 	}
 }
 
-void Sprite::draw(Vector2 size, Vector2 pos, SDL_Renderer *render) {
+void Sprite::draw(Vector2 size, Vector2 pos, SDL_Renderer *render){
+
+	// Update the sprite then draw it on the screen
 	update();
 	image->draw(size, pos, currentCrop, rotate, render);
 }
