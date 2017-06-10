@@ -8,17 +8,29 @@ Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber) {
 	this->image = image;
 	this->firstFrameCrop = firstFrameCrop;
 	this->frameNumber = frameNumber;
-	currentCrop = firstFrameCrop;
 	startFrame = 0;
-	currentFrame = startFrame;
 	endFrame = frameNumber;
 	rotate = false;
-	timePassed = 0;
 	once = false;
 	pause = false;
+	currentCrop = firstFrameCrop;
+	currentFrame = startFrame;
+	timePassed = 0;
 }
 
-Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bool rotate) {}
+Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bool rotate) {
+	this->image = image;
+	this->firstFrameCrop = firstFrameCrop;
+	this->frameNumber = frameNumber;
+	this->rotate = rotate;
+	startFrame = 0;
+	endFrame = frameNumber;
+	once = false;
+	pause = false;
+	currentCrop = firstFrameCrop;
+	currentFrame = startFrame;
+	timePassed = 0;
+}
 
 Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bool rotate, bool once) {
 	this->image = image;
@@ -26,12 +38,12 @@ Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bo
 	this->frameNumber = frameNumber;
 	this->rotate = rotate;
 	this->once = once;
-	currentCrop = firstFrameCrop;
 	startFrame = 0;
-	currentFrame = startFrame;
 	endFrame = frameNumber;
-	timePassed = 0;
 	pause = false;
+	currentCrop = firstFrameCrop;
+	currentFrame = startFrame;
+	timePassed = 0;
 }
 
 Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bool rotate, bool once, bool pause) {
@@ -41,14 +53,26 @@ Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bo
 	this->rotate = rotate;
 	this->once = once;
 	this->pause = pause;
-	currentCrop = firstFrameCrop;
 	startFrame = 0;
-	currentFrame = startFrame;
 	endFrame = frameNumber;
+	currentCrop = firstFrameCrop;
+	currentFrame = startFrame;
 	timePassed = 0;
 }
 
-Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int frameNumber, bool rotate, bool once, bool pause, unsigned int startFrame, unsigned int endFrame) {}
+Sprite::Sprite(Img *image, SDL_Rect firstFrameCrop, unsigned int startFrame, unsigned int endFrame, unsigned int frameNumber, bool rotate, bool once, bool pause) {
+	this->image = image;
+	this->firstFrameCrop = firstFrameCrop;
+	this->startFrame = startFrame;
+	this->endFrame = endFrame;
+	this->frameNumber = frameNumber;
+	this->rotate = rotate;
+	this->once = once;
+	this->pause = pause;
+	currentCrop = firstFrameCrop;
+	currentFrame = startFrame;
+	timePassed = 0;
+}
 
 /*** Destructors ***/
 Sprite::~Sprite() {
