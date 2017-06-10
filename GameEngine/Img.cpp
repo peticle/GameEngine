@@ -10,6 +10,13 @@ Img::Img(std::string fileName, SDL_Renderer *render) {
 	fileName = "img/" + fileName;
 	SDL_Surface *loadSurf = IMG_Load(fileName.c_str());
 	textu = SDL_CreateTextureFromSurface(render, loadSurf);
+
+	// Set the variable textuSize
+	int textuW = 0;
+	int textuH = 0;
+	SDL_QueryTexture(textu, NULL, NULL, &textuW, &textuH);
+	textuSize = Vector2(textuW, textuH);
+
 	SDL_FreeSurface(loadSurf);
 }
 
@@ -25,6 +32,10 @@ SDL_Texture *Img::getTexture() const {
 
 SDL_Rect Img::getRect() const {
 	return rect;
+}
+
+Vector2 Img::getTextuSize() const {
+	return textuSize;
 }
 
 /*** Setters ***/
@@ -57,6 +68,16 @@ void Img::draw(Vector2 size, Vector2 pos, SDL_Rect crop, SDL_Renderer *render) {
 
 	prepareDraw(size, pos);
 	SDL_RenderCopy(render, textu, &crop, &rect);
+}
+
+void Img::draw(Vector2 size, Vector2 pos, SDL_Rect crop, bool rotate, SDL_Renderer *render) {
+	
+	prepareDraw(size, pos);
+
+	if (!rotate)
+		draw(size, pos, crop, render);
+	else
+		SDL_RenderCopyEx(render, textu, &crop, &rect, 180.0, NULL, SDL_FLIP_VERTICAL);
 }
 
 /*** Private functions ***/

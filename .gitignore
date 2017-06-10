@@ -30,11 +30,7 @@
 *.exe
 *.out
 *.app
-*.filters
-*.vcxproj
 *.suo
-*.db
-*.sln
 *.opendb
 *.ipch
 *.pdb
@@ -44,3 +40,15 @@
 *.idb
 *.ilk
 *.aps
+*.db
+*.vcxproj
+*.vcxproj
+*.sln
+*.filters
+img/img.jpg
+*.enc
+GameEngine/main.cpp
+img/walk.png
+img/mario.png
+img/link.jpg
+GameEngine/main.cpp
