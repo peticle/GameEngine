@@ -85,12 +85,53 @@ Sprite::~Sprite() {
 	image = NULL;
 }
 
+/*** Getters ***/
+Img *Sprite::getImage() const {
+	return image;
+}
+
+SDL_Rect Sprite::getFirstFrameCrop() const {
+	return firstFrameCrop;
+}
+
 SDL_Rect Sprite::getCurrentCrop() const {
 	return currentCrop;
 }
 
-Img *Sprite::getImage() const {
-	return image;
+unsigned int Sprite::getFrameNumber() const {
+	return frameNumber;
+}
+
+unsigned int Sprite::getStartFrame() const {
+	return startFrame;
+}
+
+unsigned int Sprite::getCurrentFrame() const {
+	return currentFrame;
+}
+
+unsigned int Sprite::getEndFrame() const {
+	return endFrame;
+}
+
+unsigned int Sprite::getTimePassed() const {
+	return timePassed;
+}
+
+bool Sprite::getRotate() const {
+	return rotate;
+}
+
+bool Sprite::getPause() const {
+	return pause;
+}
+
+bool Sprite::getOnce() const {
+	return once;
+}
+
+float Sprite::getDelay() const {
+	return delay;
 }
 
 /*** Public functions ***/

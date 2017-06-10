@@ -32,17 +32,26 @@ public:
 	unsigned int getStartFrame() const;
 	unsigned int getCurrentFrame() const;
 	unsigned int getEndFrame() const;
+	unsigned int getTimePassed() const;
 	bool getRotate() const;
+	bool getPause() const;
+	bool getOnce() const;
+	float getDelay() const;
 
 	/*** Setters ***/
 
 	void setImage(Img *image);
 	void setFirstFrameCrop(SDL_Rect firstFrameCrop);
+	void setCurrentCrop(SDL_Rect currentCrop);
 	void setFrameNumber(unsigned int frameNumber);
 	void setStartFrame(unsigned int startFrame);
-	void setCurrentFram(unsigned int currentFrame);
+	void setCurrentFrame(unsigned int currentFrame);
 	void setEndFrame(unsigned int endFrame);
+	void setTimePassed(unsigned int timePassed);
 	void setRotate(bool rotate);
+	void setPause(bool pause);
+	void setOnce(bool once);
+	void setDelay(float delay);
 
 	/*** Public functions ***/
 
