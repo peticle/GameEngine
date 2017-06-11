@@ -1,10 +1,13 @@
 #include "Cfg.h"
 
+// Declaration of the statics
+int Cfg::gameWidth = 1920;
+int Cfg::gameHeight = 1080;
+std::map<std::string, SDL_Scancode> Cfg::controls;
+std::map<std::string, SDL_Scancode> Cfg::altControls;
+
 /*** Constructors ***/
-Cfg::Cfg() {
-	gameWidth = 640;
-	gameHeight = 480;
-}
+Cfg::Cfg() {}
 
 /*** Getters ***/
 int Cfg::getGameWidth() {
